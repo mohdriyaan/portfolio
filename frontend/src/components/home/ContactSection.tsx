@@ -9,7 +9,7 @@ const EMAIL = 'mohammedrayaan1@gmail.com'
 type Errors = Partial<Record<'name' | 'email' | 'message', string>>
 
 export function ContactSection() {
-  const { ref, visible } = useReveal<HTMLElement>()
+  const { ref, visible } = useReveal<HTMLDivElement>()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')

@@ -2,7 +2,7 @@ import { useReveal } from '../../hooks/useReveal'
 import { SectionHeading } from '../ui/SectionHeading'
 
 export function AboutSection() {
-  const { ref, visible } = useReveal<HTMLElement>()
+  const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
     <section id="about" className="section-block about-section" aria-labelledby="about-title">
