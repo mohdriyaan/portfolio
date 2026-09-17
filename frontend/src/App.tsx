@@ -115,7 +115,11 @@ function Navbar({ caseStudy, onHome }: { caseStudy: boolean; onHome: () => void 
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light') } catch {}
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light')
+    } catch {
+      // Storage can be unavailable in some privacy-restricted browser contexts.
+    }
   }, [dark])
 
   const toggleTheme = useCallback(() => setDark((value) => !value), [])
