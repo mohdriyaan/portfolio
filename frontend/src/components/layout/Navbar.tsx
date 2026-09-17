@@ -31,6 +31,7 @@ export function Navbar({ isCaseStudy, onHome }: NavbarProps) {
           type="button"
           aria-expanded={menuOpen}
           aria-controls="primary-nav"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           onClick={() => setMenuOpen((open) => !open)}
         >
           <span />

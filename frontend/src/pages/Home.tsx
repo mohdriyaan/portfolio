@@ -9,7 +9,7 @@ type HomeProps = {
 
 export function Home({ onOpenProject }: HomeProps) {
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <ProjectSection onOpenProject={onOpenProject} />
       <AboutSection />
