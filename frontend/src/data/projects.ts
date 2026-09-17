@@ -12,7 +12,7 @@ export const projects: Project[] = [
     stack: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'GitHub REST', 'GitHub GraphQL'],
     liveUrl: 'https://github-dashboard-jp4t.onrender.com',
     repoUrl: 'https://github.com/mohdriyaan/github-dashboard',
-    screenshot: '/project-shots/github-dashboard.webp',
+    screenshot: '/project-shots/profile-dashboard.png',
     screenshotAlt: 'GitHub Dashboard showing a profile, contribution activity, streak and repository analytics',
     problem:
       'GitHub exposes a lot of raw activity, but the important patterns are scattered across profile, contribution and repository views. The project brings those signals together into one readable surface while keeping interpretations tied to public activity.',
@@ -43,7 +43,7 @@ export const projects: Project[] = [
     stack: ['React', 'Vite', 'React Router', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Zod'],
     liveUrl: 'https://relocation-budget.vercel.app/',
     repoUrl: 'https://github.com/mohdriyaan/relocation-budget',
-    screenshot: '/project-shots/relocation-budget.webp',
+    screenshot: '/project-shots/dashboard.jpg',
     screenshotAlt: 'Relocation Budget dashboard with budget overview, setup call to action and navigation',
     problem:
       'International relocation mixes one-time costs, recurring costs and different currencies. The project puts those calculations into one authenticated workspace so users can model a move instead of keeping the numbers in disconnected notes and spreadsheets.',
