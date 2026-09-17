@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import type { FormEvent } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 type Project = {
   slug: string
@@ -78,20 +79,20 @@ function useReveal() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const element = document.querySelector<HTMLElement>('[data-reveal]')
-    if (!element) return
+    const elements = document.querySelectorAll<HTMLElement>('[data-reveal]')
+    if (!elements.length) return
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible')
+        })
+        setVisible(true)
       },
       { threshold: 0.15 },
     )
 
-    observer.observe(element)
+    elements.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
   }, [])
 
@@ -100,13 +101,21 @@ function useReveal() {
 
 function Navbar({ caseStudy, onHome }: { caseStudy: boolean; onHome: () => void }) {
   const [dark, setDark] = useState(() => {
-    const saved = localStorage.getItem('theme')
-    return saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    try {
+      const saved = localStorage.getItem('theme')
+      return saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    } catch {
+      return false
+    }
   })
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
-    localStorage.setItem('theme', dark ? 'dark' : 'light')
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light')
+    } catch {
+      // Storage can be unavailable in private browsing contexts.
+    }
   }, [dark])
 
   return (
@@ -192,7 +201,7 @@ function ProjectPreview({ project }: { project: Project }) {
 
 function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: (slug: string) => void }) {
   return (
-    <article className="project-card">
+    <article className="project-card reveal" data-reveal>
       <div className={`project-copy ${index % 2 ? 'project-copy-last' : ''}`}>
         <span className="project-number">0{index + 1}</span>
         <h3>{project.name}</h3>
@@ -240,12 +249,12 @@ function Work({ onOpen }: { onOpen: (slug: string) => void }) {
 }
 
 function About() {
-  const visible = useReveal()
+  useReveal()
 
   return (
     <section id="about" className="container section bordered-section">
       <h2 className="section-label">About</h2>
-      <div className={`about-grid reveal ${visible ? 'is-visible' : ''}`} data-reveal>
+      <div className="about-grid reveal" data-reveal>
         <div>
           <p className="display-copy">
             I started in technical support, where solving a problem meant tracing it across networks, systems,
@@ -446,7 +455,11 @@ export default function App() {
   const [route, setRoute] = useState(getRoute)
 
   useEffect(() => {
-    const onHashChange = () => setRoute(getRoute())
+    const onHashChange = () => {
+      setRoute(getRoute())
+      window.scrollTo(0, 0)
+    }
+
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
@@ -458,12 +471,12 @@ export default function App() {
 
   const goHome = () => {
     window.location.hash = '/'
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+    window.scrollTo(0, 0)
   }
 
   const openProject = (slug: string) => {
     window.location.hash = `/work/${slug}`
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+    window.scrollTo(0, 0)
   }
 
   return (
