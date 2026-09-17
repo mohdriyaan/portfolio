@@ -16,7 +16,7 @@ export function ProjectScreenshot({ src, alt, label, action }: ProjectScreenshot
         {action ? <div className="screenshot-action">{action}</div> : <span aria-hidden="true" />}
       </div>
       <div className="screenshot-image">
-        <img src={src} alt={alt} loading="lazy" />
+        <img src={src} alt={alt} loading="lazy" decoding="async" />
       </div>
     </figure>
   )

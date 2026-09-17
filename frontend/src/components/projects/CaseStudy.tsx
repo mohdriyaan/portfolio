@@ -12,7 +12,7 @@ type CaseStudyProps = {
 
 export function CaseStudy({ project, onBack }: CaseStudyProps) {
   return (
-    <main className="case-page">
+    <main id="main-content" className="case-page">
       <div className="container">
         <div className="case-back-row">
           <button className="back-link" type="button" onClick={onBack}>← Back to selected work</button>

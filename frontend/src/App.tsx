@@ -26,6 +26,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar isCaseStudy={Boolean(project)} onHome={handleHome} />
       {project ? <ProjectCaseStudy project={project} onBack={handleHome} /> : <Home onOpenProject={openProject} />}
       <Footer />
