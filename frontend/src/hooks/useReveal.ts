@@ -1,17 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 export function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null)
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(prefersReducedMotion)
 
   useEffect(() => {
     const element = ref.current
-    if (!element) return
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setVisible(true)
-      return
-    }
+    if (!element || prefersReducedMotion()) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
