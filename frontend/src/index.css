@@ -539,7 +539,14 @@ ul { padding: 0; }
   border-top: 1px solid var(--line);
 }
 .case-section:first-child { padding-top: 0; border-top: 0; }
-.case-section-number { color: var(--accent); padding-top: 7px; }
+.case-section-number {
+  align-self: start;
+  padding-top: 1px;
+  color: var(--accent);
+  font: 500 10px/1 'DM Mono', monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
 .case-section-content { min-width: 0; }
 .case-section-content h2 { margin: 0; font: 500 clamp(2rem, 3.1vw, 3rem)/1 'Fraunces', Georgia, serif; letter-spacing: -.03em; }
 .case-copy { max-width: 720px; margin-top: 18px; color: var(--muted); font-size: 18px; line-height: 1.72; }
