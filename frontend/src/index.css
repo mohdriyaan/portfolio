@@ -125,6 +125,24 @@ img {
   overflow-x: clip;
 }
 
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 600 12px/1 'DM Mono', monospace;
+  transition: transform .18s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .site-header {
   position: sticky;
   top: 0;
