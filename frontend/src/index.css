@@ -85,6 +85,24 @@ img {
   background: var(--accent-soft);
 }
 
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 600 12px/1 'DM Mono', monospace;
+  transition: transform .18s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1442,4 +1460,16 @@ img {
     opacity: 1;
     transform: none;
   }
+}
+
+.contact-gmail-fallback {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+.contact-gmail-fallback:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
