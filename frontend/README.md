@@ -15,8 +15,8 @@ A responsive React + TypeScript portfolio for Mohammed Riyaan.
 frontend/
 ├── public/
 │   ├── project-shots/
-│   │   ├── github-dashboard.webp
-│   │   └── relocation-budget.webp
+│   │   ├── profile-dashboard.png
+│   │   └── dashboard.jpg
 │   ├── favicon.svg
 │   └── Mohammed_Riyaan_Resume.pdf
 ├── src/

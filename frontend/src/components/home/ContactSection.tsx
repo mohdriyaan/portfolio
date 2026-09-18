@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useReveal } from '../../hooks/useReveal'
 import { Button } from '../ui/Button'
 
-const EMAIL = 'mohammedrayaan1@gmail.com'
+const EMAIL = 'mohammedriyaan1@gmail.com'
 
 type Errors = Partial<Record<'name' | 'email' | 'message', string>>
 
@@ -48,21 +48,20 @@ export function ContactSection() {
       `?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`
 
-    const gmailUrl =
-      `https://mail.google.com/mail/?view=cm&fs=1` +
-      `&to=${encodeURIComponent(EMAIL)}` +
-      `&su=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`
-
-    // Try the visitor's default email client first.
+    // A mailto link is the primary path. Some visitors may not have
+    // a desktop mail client registered, so a Gmail fallback is shown
+    // instead of opening a second window automatically.
+    setStatus('success')
     window.location.href = mailtoUrl
-
-    // Give the browser a moment, then provide Gmail as a fallback.
-    window.setTimeout(() => {
-      setStatus('success')
-      window.open(gmailUrl, '_blank', 'noopener,noreferrer')
-    }, 900)
   }
+
+  const fallbackSubject = `Portfolio contact from ${name.trim()}`
+  const fallbackBody = `${message.trim()}\n\n— ${name.trim()} (${email.trim()})`
+  const fallbackGmailUrl =
+    `https://mail.google.com/mail/?view=cm&fs=1` +
+    `&to=${encodeURIComponent(EMAIL)}` +
+    `&su=${encodeURIComponent(fallbackSubject)}` +
+    `&body=${encodeURIComponent(fallbackBody)}`
 
   return (
     <section
@@ -113,10 +112,13 @@ export function ContactSection() {
               value={name}
               onChange={(event) => setName(event.target.value)}
               aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? 'name-error' : undefined}
             />
 
             {errors.name ? (
-              <span className="field-error">{errors.name}</span>
+              <span id="name-error" className="field-error" role="alert">
+                {errors.name}
+              </span>
             ) : null}
 
             <label htmlFor="email">Email</label>
@@ -129,10 +131,13 @@ export function ContactSection() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? 'email-error' : undefined}
             />
 
             {errors.email ? (
-              <span className="field-error">{errors.email}</span>
+              <span id="email-error" className="field-error" role="alert">
+                {errors.email}
+              </span>
             ) : null}
 
             <label htmlFor="message">Message</label>
@@ -144,10 +149,13 @@ export function ContactSection() {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'message-error' : undefined}
             />
 
             {errors.message ? (
-              <span className="field-error">{errors.message}</span>
+              <span id="message-error" className="field-error" role="alert">
+                {errors.message}
+              </span>
             ) : null}
 
             <Button type="submit">
@@ -155,8 +163,16 @@ export function ContactSection() {
             </Button>
 
             {status === 'success' ? (
-              <p className="form-status">
-                Your email draft should now be open. Hit send there to reach me.
+              <p className="form-status" role="status" aria-live="polite">
+                Email app launch attempted.{' '}
+                <a
+                  className="contact-gmail-fallback"
+                  href={fallbackGmailUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open in Gmail instead ↗
+                </a>
               </p>
             ) : null}
           </form>
