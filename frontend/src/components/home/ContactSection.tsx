@@ -163,8 +163,8 @@ export function ContactSection() {
             </Button>
 
             {status === 'success' ? (
-              <p className="form-status">
-                Your email client should now be open.{' '}
+              <p className="form-status" role="status" aria-live="polite">
+                Email app launch attempted.{' '}
                 <a
                   className="contact-gmail-fallback"
                   href={fallbackGmailUrl}
