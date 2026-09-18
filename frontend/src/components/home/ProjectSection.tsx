@@ -8,7 +8,11 @@ type ProjectSectionProps = {
 
 export function ProjectSection({ onOpenProject }: ProjectSectionProps) {
   return (
-    <section id="work" className="section-block work-section" aria-labelledby="work-title">
+    <section
+      id="work"
+      className="section-block work-section"
+      aria-labelledby="work-title"
+    >
       <div className="container">
         <SectionHeading
           index="02"
@@ -18,9 +22,13 @@ export function ProjectSection({ onOpenProject }: ProjectSectionProps) {
           id="work-title"
         />
 
-        <div className="projects-list">
+        <div className="projects-list work-projects">
           {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} onOpen={onOpenProject} />
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              onOpen={onOpenProject}
+            />
           ))}
         </div>
       </div>
