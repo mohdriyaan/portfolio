@@ -51,16 +51,8 @@ export function ContactSection() {
     // A mailto link is the primary path. Some visitors may not have
     // a desktop mail client registered, so a Gmail fallback is shown
     // instead of opening a second window automatically.
-    const gmailUrl =
-      `https://mail.google.com/mail/?view=cm&fs=1` +
-      `&to=${encodeURIComponent(EMAIL)}` +
-      `&su=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`
-
     setStatus('success')
     window.location.href = mailtoUrl
-
-    return gmailUrl
   }
 
   const fallbackSubject = `Portfolio contact from ${name.trim()}`
